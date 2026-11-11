@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#7a1f2b">
+<link rel="icon" href="icona-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Colloquio pregiudiziale – Tribunale Ecclesiastico Partenopeo</title>
+<style>
+:root{
+  --ink:#1f2328; --muted:#5d6670; --line:#d9dde2; --bg:#f6f5f2; --card:#ffffff;
+  --accent:#7a1f2b; --accent-ink:#ffffff; --accent-soft:#f4e9ea; --flag:#9a5b00; --flag-soft:#fff4e0; --flag-ink:#6b4a10; --ok:#2f6b3a;
+  --field:#ffffff; --hover:#f1f1ef; --chip:#eef0f3; --chip-ink:#46505a;
+  --note:#fbfaf6; --note-line:#cbbfa8; --note-ink:#6d5a2e; --info:#eef4ef; --info-line:#cfe0d2; --info-ink:#24502c; --warn-line:#f0d9ac;
+  --focus:#c9a3a8; color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --ink:#e4e4e1; --muted:#a2a9b0; --line:#3a3f46; --bg:#17191c; --card:#212428;
+  --accent:#e3909b; --accent-ink:#1b1d20; --accent-soft:#3a2328; --flag:#e6ac55; --flag-soft:#352a17; --flag-ink:#f0cf98; --ok:#72c483;
+  --field:#1b1e21; --hover:#2a2e33; --chip:#30353b; --chip-ink:#c4cad0;
+  --note:#25231e; --note-line:#5e533b; --note-ink:#d8c79f; --info:#1d2e22; --info-line:#2f4d36; --info-ink:#a8d8b2; --warn-line:#5a4723;
+  --focus:#7a4a52; color-scheme:dark;
+}
+:root[data-theme="dark"] #brandLogo{background:#fff;border-radius:50%;padding:3px;box-sizing:content-box}
+.theme{grid-column:1/3;display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.theme button{flex:1;border:0!important;border-radius:0!important;background:transparent!important;color:var(--muted);padding:5px 4px!important;font-size:12px!important}
+.theme button.on{background:var(--accent-soft)!important;color:var(--accent);font-weight:600}
+.genrow{display:flex;gap:6px}.genrow input{flex:1}
+.genrow button{border:1px solid var(--accent);background:var(--card);color:var(--accent);border-radius:6px;padding:0 10px;font-size:12.5px;white-space:nowrap}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.45}
+button{font:inherit;cursor:pointer}
+.app{display:grid;grid-template-columns:270px 1fr;height:100vh}
+aside{background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.brand{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.brand img{display:block;width:56px;height:57px;margin:0 auto 8px}
+.brand{text-align:center}
+.brand b{display:block;color:var(--accent);font-family:Georgia,"Times New Roman",serif;font-size:14px;letter-spacing:.02em}
+.brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.case{height:58px;overflow:hidden;padding:10px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.case strong{color:var(--ink)}
+nav{overflow:auto;flex:1;padding:6px 0}
+nav button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;background:none;padding:7px 18px;font-size:13.5px;color:var(--ink)}
+nav button:hover{background:var(--hover)}
+nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+nav .num{width:20px;color:var(--muted);font-size:12px;flex:none}
+nav .lbl{flex:1}
+nav .dot{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--muted);flex:none}
+nav .dot.part{background:linear-gradient(90deg,var(--muted) 50%,transparent 50%)}
+nav .dot.full{background:var(--ok);border-color:var(--ok)}
+nav .flagc{background:var(--flag-soft);color:var(--flag);border-radius:9px;padding:0 6px;font-size:11px;flex:none}
+.tools{border-top:1px solid var(--line);padding:10px 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tools button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;padding:6px;font-size:12.5px}
+.tools button:hover{border-color:var(--accent);color:var(--accent)}
+.status{grid-column:1/3;font-size:11.5px;color:var(--muted);text-align:center;padding-top:2px}
+main{overflow:auto;min-height:0}
+.wrap{max-width:900px;margin:0 auto;padding:26px 28px 80px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:normal;font-size:20px;margin:0 0 4px;color:var(--accent)}
+.intro{color:var(--muted);margin:0 0 18px;font-size:14px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.q.flagged{border-left:4px solid var(--flag)}
+.q > label.ql{display:block;font-weight:600;margin-bottom:6px}
+.help{font-size:12.5px;color:var(--muted);margin:-2px 0 8px}
+.capi{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 8px}
+.capi span{font-size:11px;background:var(--chip);color:var(--chip-ink);border-radius:10px;padding:1px 8px}
+input[type=text],input[type=date],input[type=tel],input[type=email],textarea,select{width:100%;font:inherit;border:1px solid var(--line);border-radius:6px;padding:7px 9px;background:var(--field);color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--focus);border-color:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:6px 14px}
+.opts label{display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer}
+.opts.col{flex-direction:column;gap:5px}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.side h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+.det{margin-top:8px;padding:10px;background:var(--flag-soft);border-radius:6px}
+.det .dl{font-size:12.5px;color:var(--flag-ink);margin-bottom:5px}
+.det select{margin-top:6px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.fieldsm label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.note{background:var(--note);border:1px dashed var(--note-line)}
+.note > label.ql{color:var(--note-ink)}
+.pager{display:flex;justify-content:space-between;margin-top:20px}
+.pager button,.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:8px 16px}
+.pager button.sec,.btn.sec{background:var(--card);color:var(--accent)}
+.btn.small{padding:5px 10px;font-size:13px}
+.info{background:var(--info);border:1px solid var(--info-line);color:var(--info-ink);border-radius:8px;padding:10px 14px;margin:0 0 12px;font-size:14px}
+.warn{background:var(--flag-soft);border:1px solid var(--warn-line);color:var(--flag-ink);border-radius:8px;padding:10px 14px;margin:0 0 12px;font-size:14px}
+.testi .t{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.testi .t .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-weight:600}
+.testi .t .hd button{border:0;background:none;color:#a33;font-size:13px}
+.grid-gap{display:grid;gap:8px}
+.ind h3{font-size:14px;margin:10px 0 4px;color:var(--flag)}
+.ind ul{margin:0 0 6px;padding-left:20px;font-size:13.5px}
+.reportbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+#report{background:#fff;color:#1f2328;border:1px solid var(--line);padding:48px 56px;font-family:Georgia,"Times New Roman",serif;font-size:12.5pt;line-height:1.5}
+/* ---- report typography (also exported to Word) ---- */
+.r-head{text-align:center;margin-bottom:22px}
+.r-logo{display:block;margin:0 auto 10px;width:90px;height:92px}
+.r-head .t1{font-size:12.5pt;font-weight:bold;letter-spacing:.06em;text-transform:uppercase}
+.r-head .t2{font-size:10pt;font-style:italic;margin-top:2px}
+.r-head hr{border:0;border-top:1px solid #000;margin:12px 0}
+.r-head .t3{font-size:11.5pt;font-weight:bold;letter-spacing:.04em;margin-top:14px}
+.r-head .t4{font-size:10.5pt;margin-top:4px}
+.r-h2{font-size:11pt;font-weight:bold;text-transform:uppercase;letter-spacing:.03em;margin:22px 0 8px;border-bottom:1px solid #999;padding-bottom:2px}
+.r-h3{font-size:11pt;font-weight:bold;font-style:italic;margin:14px 0 4px}
+.r-q{margin:0 0 8px}
+.r-q .rq{font-weight:bold}
+.r-tab{border-collapse:collapse;width:100%;font-size:11pt}
+.r-tab td,.r-tab th{border:1px solid #888;padding:4px 6px;vertical-align:top;text-align:left}
+.r-tab th{background:#eee}
+.r-sign{margin-top:36px;display:flex;justify-content:space-between;page-break-inside:avoid}
+.r-foot{margin-top:30px;font-size:9.5pt;color:#444;border-top:1px solid #999;padding-top:6px;font-style:italic}
+.r-obs{font-style:italic;color:#333}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:50}
+.modal{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:440px;width:calc(100% - 40px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.modal p{margin:0 0 16px;white-space:pre-line}
+.modal .fieldsm{margin-bottom:10px}
+.modal h2{font-family:Georgia,"Times New Roman",serif;font-weight:normal;color:var(--accent);font-size:18px;margin:0 0 6px}
+.modal .mb{display:flex;justify-content:flex-end;gap:8px}
+@media print{
+  @page{size:A4;margin:2cm}
+  body{background:#fff;color:#000}
+  .app{display:block;height:auto}
+  aside,.reportbar,.noprint{display:none!important}
+  main{overflow:visible}
+  .wrap{max-width:none;padding:0}
+  #report{border:0;padding:0}
+  .r-h2{page-break-after:avoid}
+}
+@media (max-width:900px){.app{grid-template-columns:220px 1fr}.dual,.row2,.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><img id="brandLogo" alt=""><b>Tribunale Ecclesiastico Partenopeo</b><small id="brandSub">Servizio per i fedeli separati VIII decanato – Diocesi di Napoli</small><small id="brandCons" style="margin-top:4px"></small></div>
+    <div class="case" id="caseBox"></div>
+    <nav id="nav"></nav>
+    <div class="tools">
+      <button id="bNew" title="Svuota il modulo e inizia una nuova pratica">Nuova pratica</button>
+      <button id="bOpen" title="Apri una pratica salvata con questo strumento (file Word)">Apri pratica</button>
+      <button id="bSave" title="Salva la pratica in un file Word con il protocollo come nome" style="grid-column:1/3">Salva pratica (Word)</button>
+      <button id="bSet" title="Nome e sigla del consulente, servizio, luogo" style="grid-column:1/3">Impostazioni del consulente</button>
+      <div class="theme" id="theme" title="Aspetto"><button data-theme-set="auto">Automatico</button><button data-theme-set="light">Chiaro</button><button data-theme-set="dark">Scuro</button></div>
+      <div class="status" id="status">I dati restano su questo computer</div>
+      <input type="file" id="fileIn" accept=".docx,.json" hidden>
+    </div>
+  </aside>
+  <main id="main"><div class="wrap" id="wrap"></div></main>
+</div>
+
+<script>
+"use strict";
+/* ================= CONFIGURAZIONE ================= */
+const CONFIG = {
+  tribunale: "Tribunale Ecclesiastico Partenopeo",
+  servizio: "Servizio per i fedeli separati VIII decanato – Diocesi di Napoli",
+  consulente: "d. Mario Ansaldi",
+  sigla: "MA",
+  luogoFirma: "Napoli"
+};
+
+const LOGO="data:image/png;base64,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";
+
+/* ================= CAPI DI NULLITÀ ================= */
+const CAPI = {
+  C1095:    "Incapacità consensuale (can. 1095, 2° e 3°)",
+  C1097:    "Errore sulla persona o su una sua qualità (can. 1097)",
+  C1098:    "Dolo (can. 1098)",
+  SIM_TOT:  "Simulazione totale (can. 1101 §2)",
+  SIM_PROLE:"Esclusione della prole – bonum prolis (can. 1101 §2)",
+  SIM_FIDEI:"Esclusione della fedeltà – bonum fidei (can. 1101 §2)",
+  SIM_SACR: "Esclusione dell'indissolubilità – bonum sacramenti (can. 1101 §2)",
+  SIM_DIGN: "Esclusione della dignità sacramentale (can. 1101 §2)",
+  C1102:    "Condizione (can. 1102)",
+  C1103:    "Violenza o timore grave (can. 1103)",
+  IMP:      "Impedimenti dirimenti (cann. 1083-1094)",
+  FORMA:    "Difetto di forma canonica (cann. 1108 ss.)"
+};
+
+/* Circostanze dell'art. 14 §1 delle Regole procedurali (Mitis Iudex) */
+const ART14 = {
+  fede:       "Mancanza di fede che può generare la simulazione del consenso o l'errore che determina la volontà",
+  brevita:    "Brevità della convivenza coniugale",
+  aborto:     "Aborto procurato per impedire la procreazione",
+  relazione:  "Ostinata permanenza in una relazione extraconiugale al tempo delle nozze o in un tempo immediatamente successivo",
+  occult:     "Occultamento doloso della sterilità, di una grave malattia contagiosa, di figli nati da una precedente relazione o di una carcerazione",
+  causa:      "Causa del matrimonio del tutto estranea alla vita coniugale o consistente nella gravidanza imprevista della donna",
+  violenza:   "Violenza fisica inferta per estorcere il consenso",
+  ragione:    "Mancanza di uso di ragione comprovata da documenti medici"
+};
+
+/* ================= QUESTIONARIO =================
+ tipi: text | date | tel | email | textarea | choice | yn | checks
+ dual:true  -> la domanda si pone per dichiarante e coniuge
+ capi       -> capi a cui la risposta "SÌ" (yn) è riconducibile
+ flag       -> per choice/checks: { "opzione": [capi] }
+ a14        -> circostanza art. 14 suggerita
+ tempo:true -> per yn: chiede quando si colloca il fatto
+*/
+const SI="Sì", NO="No", NS="Non so";
+const S = [
+ {id:"proc", title:"Dati della pratica", intro:"Nome e cognome inseriti qui sono gli stessi delle sezioni «Il dichiarante» e «L'altro coniuge»: basta scriverli una volta.", fields:[
+   {id:"parte",type:"choice",label:"Il dichiarante è parte come",opts:["Attore","Convenuto"]},
+   {id:"dataColl",type:"date",label:"Data del colloquio",short:true},
+   {id:"luogoColl",type:"text",label:"Luogo del colloquio",short:true},
+   {id:"dNome",key:"dich.nome",type:"text",label:"Nome del dichiarante",short:true},
+   {id:"dCognome",key:"dich.cognome",type:"text",label:"Cognome del dichiarante",short:true},
+   {id:"cNome",key:"coni.nome",type:"text",label:"Nome dell'attore (altro coniuge)",short:true,showIf:()=>val("proc.parte")==="Convenuto"},
+   {id:"cCognome",key:"coni.cognome",type:"text",label:"Cognome dell'attore (altro coniuge)",short:true,showIf:()=>val("proc.parte")==="Convenuto"},
+   {id:"prot",type:"text",label:"Protocollo n.",short:true,gen:true},
+   {id:"nColl",type:"choice",label:"Colloquio",opts:["Primo colloquio","Colloquio successivo"]}
+ ]},
+ {id:"dich", title:"Il dichiarante", fields:[
+   {id:"nome",type:"text",label:"Nome",short:true},
+   {id:"cognome",type:"text",label:"Cognome",short:true},
+   {id:"nascita",type:"date",label:"Data di nascita",short:true},
+   {id:"luogoNascita",type:"text",label:"Luogo di nascita",short:true},
+   {id:"indirizzo",type:"text",label:"Indirizzo di residenza",short:true},
+   {id:"citta",type:"text",label:"Città e provincia",short:true},
+   {id:"studio",type:"text",label:"Titolo di studio",short:true},
+   {id:"professione",type:"text",label:"Professione / occupazione",short:true},
+   {id:"tel",type:"tel",label:"Telefono",short:true},
+   {id:"email",type:"email",label:"Email",short:true},
+   {id:"battesimo",type:"text",label:"Parrocchia e data del battesimo",short:true},
+   {id:"parrocchia",type:"text",label:"Parrocchia attuale e parroco",short:true},
+   {id:"diocesi",type:"text",label:"Diocesi di appartenenza",short:true}
+ ]},
+ {id:"coni", title:"L'altro coniuge", fields:[
+   {id:"nome",type:"text",label:"Nome",short:true},
+   {id:"cognome",type:"text",label:"Cognome",short:true},
+   {id:"nascita",type:"date",label:"Data di nascita",short:true},
+   {id:"luogoNascita",type:"text",label:"Luogo di nascita",short:true},
+   {id:"residenza",type:"text",label:"Residenza attuale (se nota)",short:true},
+   {id:"professione",type:"text",label:"Professione",short:true},
+   {id:"battezzato",type:"choice",label:"L'altro coniuge era battezzato al momento delle nozze?",
+     opts:["Sì, nella Chiesa cattolica","Sì, in altra Chiesa o comunità cristiana","No","Non so"],
+     flag:{"No":["IMP"]}, help:"Se non battezzato: verificare la dispensa dalla disparità di culto (can. 1086). Se battezzato non cattolico: verificare la licenza per il matrimonio misto (can. 1124)."},
+   {id:"reperibile",type:"text",label:"È reperibile? Recapito o indirizzo noto"},
+   {id:"atteggiamento",type:"choice",label:"Atteggiamento prevedibile dell'altro coniuge verso la causa",
+     opts:["Favorevole / disposto a collaborare","Contrario","Non ancora informato","Non so"],
+     help:"Utile per valutare il processo più breve, che richiede la domanda congiunta o il consenso dell'altra parte (can. 1683)."}
+ ]},
+ {id:"orig", title:"Famiglie d'origine", intro:"Le domande si pongono per entrambi gli sposi, nei limiti di ciò che il dichiarante conosce direttamente.", fields:[
+   {id:"clima",type:"textarea",dual:true,label:"Com'era la vita in famiglia durante l'infanzia e l'adolescenza? Com'era il rapporto con il padre e con la madre?"},
+   {id:"eventi",type:"yn",dual:true,tempo:false,label:"In famiglia ci sono stati eventi gravi (separazione dei genitori, violenze, dipendenze, malattie psichiche, lutti precoci)?",
+     capi:["C1095"],det:"Quali eventi, a che età, con quali conseguenze?"},
+   {id:"autonomia",type:"textarea",dual:true,label:"Prima delle nozze viveva ancora con i genitori? Lavorava, era economicamente autonomo/a? Chi prendeva le decisioni importanti per lui/lei?"},
+   {id:"ingerenza",type:"yn",dual:false,label:"Dopo le nozze i genitori di uno dei due hanno continuato a decidere al posto della coppia (casa, denaro, figli)?",
+     capi:["C1095"],det:"Quale famiglia, in quali decisioni concrete? Come reagiva il coniuge interessato?"}
+ ]},
+ {id:"fid", title:"Conoscenza e fidanzamento", fields:[
+   {id:"conoscenza",type:"textarea",label:"Quando e in quali circostanze vi siete conosciuti? Quanti anni avevate?"},
+   {id:"durata",type:"text",label:"Quanto è durato il fidanzamento?",short:true},
+   {id:"interruzioni",type:"yn",label:"Il fidanzamento è stato interrotto e poi ripreso?",capi:["C1095"],det:"Quante volte, per quali motivi, chi ha voluto riprendere e perché?"},
+   {id:"convivenzaPrima",type:"yn",label:"Avete convissuto prima delle nozze?",det:"Per quanto tempo e come andava la convivenza?"},
+   {id:"frequenza",type:"textarea",label:"Quanto spesso vi vedevate e che cosa facevate insieme? Avete affrontato insieme decisioni concrete (lavoro, casa, denaro) prima delle nozze?"},
+   {id:"litigi",type:"textarea",label:"Per quali motivi litigavate durante il fidanzamento? Racconti un episodio concreto."},
+   {id:"violenzaFid",type:"yn",dual:true,label:"Durante il fidanzamento ci sono stati gelosia eccessiva, controllo, aggressività verbale o fisica?",capi:["C1095"],det:"Che cosa accadde, quando, chi era presente o ne venne a conoscenza?"},
+   {id:"famiglie",type:"choice",label:"Le famiglie erano favorevoli al matrimonio?",opts:["Entrambe favorevoli","Una contraria","Entrambe contrarie","Indifferenti"]},
+   {id:"famiglieDet",type:"textarea",label:"Se c'erano contrarietà: chi era contrario, per quali motivi e come lo manifestava?"},
+   {id:"sospetti",type:"yn",label:"Prima delle nozze il dichiarante ha notato comportamenti dell'altro che lo/la preoccupavano?",capi:["C1095","C1098"],det:"Quali comportamenti, quando? Ne parlò con qualcuno?"},
+   {id:"avvisi",type:"yn",label:"Prima delle nozze qualcuno ha messo in guardia il dichiarante?",capi:["C1095","C1098"],det:"Chi, quando, che cosa disse esattamente? Come reagì il dichiarante?"}
+ ]},
+ {id:"dec", title:"La decisione di sposarsi", fields:[
+   {id:"proposta",type:"textarea",label:"Chi ha proposto di sposarsi, quando e in quali circostanze?"},
+   {id:"perche",type:"textarea",label:"Perché la decisione è stata presa proprio in quel momento?"},
+   {id:"motivi",type:"checks",label:"Quali motivi hanno inciso sulla decisione? (anche più d'uno)",
+     opts:["Desiderio di costruire una vita insieme","Gravidanza","Pressione della famiglia o dell'ambiente","Desiderio di lasciare la famiglia d'origine","Ragioni economiche o di convenienza sociale","Età, «era il momento»","Paura di restare soli","Altro"],
+     flag:{"Gravidanza":["C1103","C1095"],"Pressione della famiglia o dell'ambiente":["C1103"],"Desiderio di lasciare la famiglia d'origine":["C1095"],"Ragioni economiche o di convenienza sociale":["SIM_TOT"],"Paura di restare soli":["C1095"]},
+     a14map:{"Gravidanza":"causa","Ragioni economiche o di convenienza sociale":"causa"}},
+   {id:"gravidanza",type:"yn",label:"C'era una gravidanza al momento della decisione o delle nozze?",capi:["C1103","C1095"],a14:"causa",
+     det:"Quando è stata scoperta? Come hanno reagito i due e le famiglie? Il matrimonio era già deciso prima? Senza la gravidanza vi sareste sposati, e quando?"},
+   {id:"chiesa",type:"choice",label:"Perché vi siete sposati in chiesa?",
+     opts:["Per convinzione di fede di entrambi","Per convinzione di uno solo","Per volontà delle famiglie","Per tradizione o per la cerimonia","Altro"],
+     flag:{"Per volontà delle famiglie":["SIM_DIGN"],"Per tradizione o per la cerimonia":["SIM_DIGN"],"Per convinzione di uno solo":["SIM_DIGN"]}},
+   {id:"chiesaDet",type:"textarea",label:"Precisi la posizione di ciascuno sul matrimonio religioso."},
+   {id:"dubbi",type:"yn",dual:true,tempo:true,label:"Prima delle nozze ci sono stati dubbi sul matrimonio?",capi:["C1095","C1103"],det:"Quali dubbi, quando, con chi ne ha parlato?"},
+   {id:"rinvio",type:"yn",label:"Si è pensato di rinviare o annullare le nozze?",capi:["C1103","C1095"],det:"Chi lo propose? Perché alla fine non si fece?"}
+ ]},
+ {id:"tim", title:"Pressioni e timore", intro:"Per il can. 1103 interessa un timore grave, causato dall'esterno, che induce a scegliere il matrimonio per liberarsene.", fields:[
+   {id:"pressioni",type:"yn",dual:true,label:"Qualcuno ha fatto pressione in modo insistente perché si celebrasse il matrimonio?",capi:["C1103"],det:"Chi ha fatto pressione, con quali parole o comportamenti, quanto spesso?"},
+   {id:"temuto",type:"textarea",label:"Che cosa si temeva che sarebbe accaduto se non ci si fosse sposati?"},
+   {id:"dipendenza",type:"yn",dual:true,label:"C'era una dipendenza (economica, affettiva, di rispetto verso i genitori) da chi faceva pressione?",capi:["C1103"],det:"Di che tipo, e perché rendeva difficile dire di no?"},
+   {id:"avversione",type:"yn",dual:true,label:"C'era avversione verso il matrimonio o verso l'altra persona?",capi:["C1103"],det:"Come si manifestava? A chi fu confidata?"},
+   {id:"sottrarsi",type:"yn",dual:true,label:"Ci sono stati tentativi di sottrarsi alle nozze?",capi:["C1103"],det:"Che cosa fu fatto o detto, e come andò a finire?"},
+   {id:"violenzaFisica",type:"yn",label:"È stata usata violenza fisica per ottenere il consenso?",capi:["C1103"],a14:"violenza",det:"Da parte di chi, quando, ci sono testimoni o referti?"},
+   {id:"giorno",type:"textarea",label:"Come ricorda lo stato d'animo degli sposi il giorno delle nozze? Ci sono episodi particolari (pianto, ritardo, discussioni) e chi può confermarli?"}
+ ]},
+ {id:"cel", title:"Preparazione e celebrazione", fields:[
+   {id:"dataNozze",type:"date",label:"Data del matrimonio",short:true},
+   {id:"luogoNozze",type:"text",label:"Chiesa e località",short:true},
+   {id:"celebrante",type:"text",label:"Ministro celebrante",short:true},
+   {id:"rito",type:"choice",label:"Forma del matrimonio",opts:["Concordatario (con effetti civili)","Solo canonico","Non so"]},
+   {id:"testiSposo",type:"text",label:"Testimoni di nozze dello sposo",short:true},
+   {id:"testiSposa",type:"text",label:"Testimoni di nozze della sposa",short:true},
+   {id:"civilePrima",type:"yn",label:"Prima del matrimonio religioso c'era stato un matrimonio civile tra voi?",det:"Quando e dove?"},
+   {id:"corso",type:"yn",label:"Avete frequentato il corso di preparazione al matrimonio?",det:"Dove, con quale partecipazione? Ricorda temi o reazioni particolari?"},
+   {id:"istruttoria",type:"textarea",label:"Nel colloquio con il parroco (istruttoria matrimoniale) che cosa fu chiesto e che cosa fu dichiarato? Fu detto qualcosa di non vero o taciuto?"},
+   {id:"regime",type:"choice",label:"Regime patrimoniale scelto",opts:["Comunione dei beni","Separazione dei beni","Non so"],help:"La separazione dei beni da sola non è indizio di nulla: va letta insieme alle motivazioni."},
+   {id:"regimeDet",type:"textarea",label:"Se separazione dei beni: per volontà di chi e perché?"},
+   {id:"primiTempi",type:"textarea",label:"Come sono andati il viaggio di nozze e i primi mesi insieme?"}
+ ]},
+ {id:"fede", title:"Fede e visione del matrimonio", fields:[
+   {id:"pratica",type:"textarea",dual:true,label:"Prima delle nozze come viveva la fede (messa, sacramenti, preghiera, appartenenza a gruppi)?"},
+   {id:"idea",type:"textarea",dual:true,label:"Prima delle nozze che idea di matrimonio esprimeva? Ricorda frasi precise?"},
+   {id:"divorzio",type:"yn",dual:true,tempo:true,label:"Prima delle nozze ha detto frasi come «se va male ci separiamo» o «c'è sempre il divorzio»?",capi:["SIM_SACR"],det:"Che cosa fu detto esattamente, quando, davanti a chi? Era una battuta o una convinzione?"},
+   {id:"perSempre",type:"choice",dual:true,label:"Considerava il matrimonio «per sempre»?",opts:["Sì","No","Non ne abbiamo mai parlato","Non so"],flag:{"No":["SIM_SACR"]}},
+   {id:"rifiutoSacr",type:"yn",dual:true,label:"Rifiutava il valore religioso del matrimonio, considerandolo solo una cerimonia?",capi:["SIM_DIGN"],a14:"fede",det:"Come lo manifestava? Con quali parole o comportamenti?"},
+   {id:"totale",type:"yn",dual:true,label:"Ha detto o mostrato di sposarsi senza voler davvero formare una famiglia (solo per i documenti, per convenienza, per far contento qualcuno)?",capi:["SIM_TOT"],det:"Che cosa disse o fece, quando, chi ne è a conoscenza?"}
+ ]},
+ {id:"prole", title:"Figli e apertura alla vita", fields:[
+   {id:"figliPrec",type:"choice",dual:true,label:"Prima delle nozze aveva figli da altre relazioni?",opts:["No","Sì, ed erano noti all'altro","Sì, ma tenuti nascosti"],flag:{"Sì, ma tenuti nascosti":["C1098"]},a14map:{"Sì, ma tenuti nascosti":"occult"}},
+   {id:"figliComuni",type:"yn",label:"La coppia ha avuto figli?",det:"Nomi e anni di nascita."},
+   {id:"parlatoFigli",type:"textarea",dual:true,label:"Prima delle nozze avete parlato di figli? Che cosa diceva, con quali parole?"},
+   {id:"esclusione",type:"yn",dual:true,tempo:true,label:"Voleva escludere o rinviare i figli?",capi:["SIM_PROLE"],det:"Per quale motivo? Per sempre, per un tempo determinato o finché non si verificava qualcosa? Lo disse prima delle nozze, e a chi?"},
+   {id:"contraccezione",type:"yn",label:"Dopo le nozze sono stati usati metodi per evitare la gravidanza?",capi:["SIM_PROLE"],det:"Su iniziativa di chi, per quanto tempo? L'altro era d'accordo o lo subiva?"},
+   {id:"ivg",type:"yn",label:"Ci sono state interruzioni volontarie di gravidanza?",capi:["SIM_PROLE"],a14:"aborto",det:"Quando, decise da chi, con quale motivazione?"},
+   {id:"sterilita",type:"yn",dual:true,label:"Sapeva prima delle nozze di non poter avere figli e lo ha taciuto?",capi:["C1098"],a14:"occult",det:"Come lo sapeva? Come e quando lo ha scoperto l'altro?"}
+ ]},
+ {id:"fedelta", title:"Fedeltà", fields:[
+   {id:"relPrima",type:"yn",dual:true,label:"Aveva una relazione con un'altra persona prima delle nozze, che è continuata dopo?",capi:["SIM_FIDEI"],a14:"relazione",det:"Con chi, da quando, fino a quando? Come lo ha saputo il dichiarante?"},
+   {id:"relDurante",type:"yn",dual:true,tempo:true,label:"Durante il matrimonio ci sono state relazioni con altre persone?",capi:["SIM_FIDEI"],det:"Quanto tempo dopo le nozze sono iniziate? Come sono state scoperte?"},
+   {id:"ideaFedelta",type:"textarea",dual:true,label:"Prima delle nozze che cosa pensava o diceva della fedeltà e dell'esclusività del rapporto?"}
+ ]},
+ {id:"cond", title:"Condizioni", intro:"Can. 1102: la condizione sul futuro rende sempre invalido il matrimonio; quella sul passato o sul presente dipende dall'esistenza del fatto.", fields:[
+   {id:"condizione",type:"yn",dual:true,label:"Ha legato il proprio sì a una condizione («mi sposo solo se…»)?",capi:["C1102"],det:"Qual era la condizione, con quali parole fu espressa, a chi?"},
+   {id:"condTempo",type:"choice",label:"La condizione riguardava",opts:["Un fatto passato","Un fatto presente","Un fatto futuro","Non so"]},
+   {id:"condEsito",type:"textarea",label:"L'altro ne era a conoscenza? La condizione si è verificata?"}
+ ]},
+ {id:"err", title:"Errore e dolo", fields:[
+   {id:"qualita",type:"yn",label:"Il dichiarante si è sposato contando su una qualità precisa dell'altro che poi si è rivelata assente?",capi:["C1097"],det:"Quale qualità? Era la ragione principale della scelta? Ne aveva parlato prima delle nozze?"},
+   {id:"taciuto",type:"checks",label:"Prima delle nozze è stato nascosto o falsificato qualcosa di importante?",
+     opts:["Malattia grave","Disturbo psichico","Dipendenza (alcol, droghe, gioco…)","Sterilità","Figli nati da altre relazioni","Precedenti penali o carcerazione","Orientamento sessuale","Debiti o situazione economica","Precedente matrimonio o convivenza","Appartenenza o pratica religiosa","Altro"],
+     flag:{"Malattia grave":["C1098"],"Disturbo psichico":["C1098","C1095"],"Dipendenza (alcol, droghe, gioco…)":["C1098","C1095"],"Sterilità":["C1098"],"Figli nati da altre relazioni":["C1098"],"Precedenti penali o carcerazione":["C1098"],"Orientamento sessuale":["C1098","C1095"],"Debiti o situazione economica":["C1098"],"Precedente matrimonio o convivenza":["C1098","IMP"],"Appartenenza o pratica religiosa":["C1098"],"Altro":["C1098"]},
+     a14map:{"Malattia grave":"occult","Sterilità":"occult","Figli nati da altre relazioni":"occult","Precedenti penali o carcerazione":"occult"}},
+   {id:"taciutoDet",type:"textarea",label:"Che cosa esattamente? Da che cosa si capisce che fu nascosto di proposito, per ottenere il consenso?"},
+   {id:"scoperta",type:"textarea",label:"Quando e come lo ha scoperto?"},
+   {id:"reazione",type:"textarea",label:"Come ha reagito alla scoperta? Che cosa è cambiato nella convivenza?"},
+   {id:"sapendolo",type:"choice",label:"Se lo avesse saputo prima, si sarebbe sposato/a?",opts:["Sì","No","Non so"],flag:{"No":["C1098","C1097"]}}
+ ]},
+ {id:"pers", title:"Personalità, salute e sfera intima", intro:"Domande su entrambi. Interessano soprattutto i comportamenti già presenti prima delle nozze, anche in assenza di cure.", fields:[
+   {id:"curePrima",type:"yn",dual:true,label:"Prima delle nozze ci sono state cure psichiatriche o psicologiche?",capi:["C1095"],det:"Per quale problema, presso chi, per quanto tempo? Esistono documenti?"},
+   {id:"cureDopo",type:"yn",dual:true,label:"Dopo le nozze ci sono state cure psichiatriche o psicologiche?",capi:["C1095"],det:"Per quale problema, da quando? Il problema era già presente prima, in altra forma?"},
+   {id:"dipendenze",type:"checks",dual:true,label:"Dipendenze presenti",opts:["Alcol","Droghe","Gioco d'azzardo","Pornografia o sessualità compulsiva","Farmaci","Altro"],
+     flag:{"Alcol":["C1095"],"Droghe":["C1095"],"Gioco d'azzardo":["C1095"],"Pornografia o sessualità compulsiva":["C1095"],"Farmaci":["C1095"],"Altro":["C1095"]}},
+   {id:"dipendenzeDet",type:"textarea",dual:true,label:"Da quando? Era già presente o nota prima delle nozze?"},
+   {id:"responsabilita",type:"yn",dual:true,tempo:true,label:"Difficoltà gravi nel gestire denaro, lavoro o responsabilità quotidiane?",capi:["C1095"],det:"Episodi concreti: che cosa accadeva?"},
+   {id:"aggressivita",type:"yn",dual:true,tempo:true,label:"Aggressività, gelosia ossessiva, controllo o violenza?",capi:["C1095"],det:"Episodi concreti, date, eventuali denunce o testimoni."},
+   {id:"immaturita",type:"yn",dual:true,tempo:true,label:"Dipendenza marcata dai genitori o incapacità di prendere decisioni da adulto?",capi:["C1095"],det:"In quali situazioni concrete si vedeva?"},
+   {id:"sessualita",type:"yn",dual:true,tempo:true,label:"Difficoltà nella sfera sessuale (rifiuto, disinteresse, pratiche imposte, dubbi sull'orientamento)?",capi:["C1095"],det:"Descriva con la discrezione necessaria."},
+   {id:"consumazione",type:"choice",label:"Dopo le nozze ci sono stati rapporti coniugali completi?",opts:["Sì","No","Raramente","Preferisce non rispondere"],flag:{"No":["IMP"]},help:"In caso di non consumazione valutare anche l'impotenza (can. 1084) o la dispensa super rato (can. 1142)."},
+   {id:"malattie",type:"yn",dual:true,label:"Gravi malattie fisiche note prima delle nozze?",det:"Quali? Erano note all'altro?"},
+   {id:"usoRagione",type:"yn",label:"Al momento delle nozze uno dei due era in condizioni tali da non rendersi conto di ciò che faceva?",capi:["C1095"],a14:"ragione",det:"Che cosa accadde? Ci sono documenti medici?"},
+   {id:"documentiMed",type:"yn",label:"Esiste documentazione medica utilizzabile?",det:"Quale, relativa a chi, di quale periodo?"}
+ ]},
+ {id:"vita", title:"Vita coniugale e separazione", fields:[
+   {id:"abitazione",type:"text",label:"Dove avete abitato dopo le nozze (casa propria, con i genitori)?"},
+   {id:"primiProblemi",type:"textarea",label:"Quando sono comparsi i primi problemi seri, dopo quanto tempo dalle nozze? Racconti il primo episodio."},
+   {id:"episodi",type:"textarea",label:"Quali sono stati gli episodi più significativi della crisi?"},
+   {id:"violenzaCon",type:"yn",label:"Durante il matrimonio ci sono state violenze fisiche o psicologiche?",capi:["C1095"],det:"Da parte di chi, con quale frequenza? Ci sono denunce o referti?"},
+   {id:"rottura",type:"textarea",label:"Chi ha deciso di interrompere la convivenza, quando e perché?"},
+   {id:"riconciliazione",type:"yn",label:"Ci sono stati tentativi di riconciliazione o percorsi di coppia?",det:"Quali, con chi, con quale esito?"},
+   {id:"sepFatto",type:"date",label:"Data della separazione di fatto",short:true},
+   {id:"sepLegale",type:"date",label:"Data della separazione legale",short:true},
+   {id:"divorzio",type:"date",label:"Data della sentenza di divorzio",short:true},
+   {id:"situazione",type:"choice",dual:true,label:"Situazione attuale",opts:["Solo/a","Nuova convivenza","Nuovo matrimonio civile","Non so"]}
+ ]},
+ {id:"imp", title:"Impedimenti e precedenti", fields:[
+   {id:"vincolo",type:"yn",dual:true,label:"Al momento delle nozze era già legato/a da un precedente matrimonio (anche solo civile)?",capi:["IMP"],det:"Con chi, quando, come si è sciolto? Va verificato il valore canonico del precedente vincolo."},
+   {id:"parentela",type:"yn",label:"Esiste parentela o affinità tra i coniugi?",capi:["IMP"],det:"Di che grado? Fu concessa dispensa?"},
+   {id:"ordine",type:"yn",dual:true,label:"Ordine sacro o voto pubblico perpetuo di castità in un istituto religioso?",capi:["IMP"],det:"Quale, quando?"},
+   {id:"eta",type:"yn",label:"Uno dei due aveva meno di 16 anni (lui) o 14 anni (lei) al momento delle nozze?",capi:["IMP"],det:"Età esatta."},
+   {id:"forma",type:"yn",label:"Ci sono state irregolarità nella celebrazione (ministro senza facoltà, testimoni mancanti, celebrazione fuori parrocchia senza permesso)?",capi:["FORMA"],det:"Che cosa accadde?"},
+   {id:"penali",type:"yn",dual:true,label:"Condanne o procedimenti penali?",det:"Per quali fatti, quando? Erano noti all'altro prima delle nozze?"}
+ ]},
+ {id:"testi", title:"Persone informate sui fatti", special:"testi"},
+ {id:"doc", title:"Documentazione", fields:[
+   {id:"documenti",type:"checks",label:"Documenti disponibili o reperibili",opts:["Certificato di matrimonio canonico","Certificati di battesimo","Sentenza di separazione","Sentenza di divorzio","Documentazione medica","Lettere, messaggi, email","Fotografie o video","Relazioni di servizi sociali o consultori","Atti di procedimenti penali","Altro"]},
+   {id:"documentiDet",type:"textarea",label:"Precisazioni sui documenti (chi li ha, di quale periodo)"}
+ ]},
+ {id:"val", title:"Valutazione del consulente", special:"val"}
+];
+/* sezioni che entrano nella "esposizione dei fatti" */
+const FACT_SECTIONS = ["orig","fid","dec","tim","cel","fede","prole","fedelta","cond","err","pers","vita","imp"];
+
+/* ================= STATO ================= */
+const LS_KEY = "tep_colloquio_pratica_v1";
+let state = blank();
+let cur = 0;
+function blank(){ return {v:{}, testi:[], a14:{}, ver:1}; }
+function load(){ try{ const s = localStorage.getItem(LS_KEY); if(s){ const o = JSON.parse(s); if(o && o.v) state = o; } }catch(e){} }
+let saveT=null;
+function persist(){
+  clearTimeout(saveT);
+  saveT=setTimeout(()=>{
+    try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); setStatus("Salvato su questo computer alle "+new Date().toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})); }
+    catch(e){ setStatus("Salvataggio automatico non disponibile: usare «Salva pratica (Word)»"); }
+  },300);
+}
+function setStatus(t){ document.getElementById("status").textContent=t; }
+
+/* ================= UTILITÀ ================= */
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nl2br = s => esc(s).replace(/\n/g,"<br>");
+const rlab = l => l.replace(/\s*\((anche più d'uno)\)/,"");
+const keyOf = (sid,fid,side) => sid+"."+fid+(side?"."+side:"");
+const fkey = (s,f,side) => f.key || keyOf(s.id,f.id,side);
+const val = k => state.v[k];
+function fmtDate(d){ if(!d) return ""; const p=d.split("-"); return p.length===3? p[2]+"/"+p[1]+"/"+p[0] : d; }
+function filled(x){ return Array.isArray(x)? x.length>0 : (x!=null && String(x).trim()!==""); }
+function nameD(){ return [val("dich.nome"),val("dich.cognome")].filter(Boolean).join(" ") || "Il dichiarante"; }
+function nameC(){ return [val("coni.nome"),val("coni.cognome")].filter(Boolean).join(" ") || "L'altro coniuge"; }
+const SIDE_LBL = {d:"Dichiarante", c:"Altro coniuge"};
+function sideName(s){ return s==="d"? nameD()+" (dichiarante)" : nameC()+" (coniuge)"; }
+function durata(){
+  const a=val("cel.dataNozze"), b=val("vita.sepFatto"); if(!a||!b) return null;
+  const d1=new Date(a), d2=new Date(b); if(isNaN(d1)||isNaN(d2)||d2<d1) return null;
+  let m=(d2.getFullYear()-d1.getFullYear())*12+(d2.getMonth()-d1.getMonth()); if(d2.getDate()<d1.getDate()) m--;
+  const y=Math.floor(m/12), r=m%12;
+  return {mesi:m, txt:(y? y+(y===1?" anno":" anni"):"")+(y&&r?" e ":"")+(r? r+(r===1?" mese":" mesi"):"")+(m===0?"meno di un mese":"")};
+}
+
+/* ================= INDICATORI ================= */
+function sidesOf(f){ return f.dual? ["d","c"] : [null]; }
+function computeFlags(){
+  const out=[];
+  for(const s of S){ if(!s.fields) continue;
+    for(const f of s.fields){
+      for(const side of sidesOf(f)){
+        const k=fkey(s,f,side), v=val(k);
+        if(f.type==="yn" && v===SI && (f.capi||f.a14)){
+          out.push({s,f,side,capi:f.capi||[],a14:f.a14,det:val(k+".det"),t:val(k+".t")});
+        } else if(f.type==="choice" && v && ((f.flag&&f.flag[v])||(f.a14map&&f.a14map[v]))){
+          out.push({s,f,side,capi:(f.flag&&f.flag[v])||[],a14:f.a14map&&f.a14map[v],det:v});
+        } else if(f.type==="checks" && Array.isArray(v)){
+          for(const o of v){ if((f.flag&&f.flag[o])||(f.a14map&&f.a14map[o])) out.push({s,f,side,capi:(f.flag&&f.flag[o])||[],a14:f.a14map&&f.a14map[o],det:o}); }
+        }
+      }
+    }
+  }
+  return out;
+}
+function flagsByCapo(fl){ const m={}; for(const x of fl) for(const c of x.capi){ (m[c]=m[c]||[]).push(x); } return m; }
+function suggestedA14(fl){ const m={}; for(const x of fl) if(x.a14) m[x.a14]=true; const d=durata(); if(d && d.mesi<12) m.brevita=true; return m; }
+function isFieldFlagged(s,f){ return computeFlags().some(x=>x.s===s && x.f===f); }
+
+/* ================= RENDER: NAVIGAZIONE ================= */
+function sectionProgress(s){
+  if(s.special==="testi") return {n:state.testi.length?1:0,t:1};
+  if(s.special==="val") return {n:filled(val("val.testo"))?1:0,t:1};
+  let n=0,t=0;
+  for(const f of s.fields){ if(f.key||(f.showIf&&!f.showIf())) continue; for(const side of sidesOf(f)){ t++; if(filled(val(keyOf(s.id,f.id,side)))) n++; } }
+  return {n,t};
+}
+function renderNav(){
+  const fl=computeFlags();
+  const nav=document.getElementById("nav");
+  if(!nav.dataset.built){
+    let h="";
+    S.forEach((s,i)=>{ h+=`<button data-go="${i}"><span class="num">${i+1}</span><span class="lbl">${esc(s.title)}</span><span class="flagc" title="Elementi segnalati"></span><span class="dot"></span></button>`; });
+    h+=`<button data-go="report"><span class="num">▤</span><span class="lbl"><b>Rapporto per il Tribunale</b></span></button>`;
+    nav.innerHTML=h; nav.dataset.built="1";
+  }
+  /* aggiornamento senza ricreare i pulsanti (evita di perdere il clic) */
+  const btns=nav.querySelectorAll("button");
+  S.forEach((s,i)=>{
+    const b=btns[i], p=sectionProgress(s), nf=fl.filter(x=>x.s===s).length;
+    b.classList.toggle("active", i===cur);
+    const fc=b.querySelector(".flagc"); fc.textContent=nf||""; fc.style.display=nf?"":"none";
+    const dt=b.querySelector(".dot"); dt.classList.toggle("full", p.n>0&&p.n===p.t); dt.classList.toggle("part", p.n>0&&p.n<p.t);
+  });
+  btns[S.length].classList.toggle("active", cur==="report");
+  const cb=document.getElementById("caseBox");
+  cb.innerHTML = (val("dich.cognome")||val("coni.cognome"))
+    ? `<strong>${esc(nameD())}</strong> – ${esc(nameC())}${val("proc.prot")?`<br>Prot. ${esc(val("proc.prot"))}`:""}`
+    : "Nuova pratica";
+}
+
+/* ================= RENDER: CAMPI ================= */
+function control(s,f,side){
+  const k=fkey(s,f,side), v=val(k);
+  switch(f.type){
+    case "text": case "date": case "tel": case "email":
+      return `<input type="${f.type}" data-k="${k}" value="${esc(v)}">`;
+    case "textarea":
+      return `<textarea data-k="${k}">${esc(v)}</textarea>`;
+    case "choice":
+      return `<div class="opts ${f.opts.length>3?"col":""}">`+f.opts.map(o=>`<label><input type="radio" name="${k}" data-k="${k}" value="${esc(o)}" ${v===o?"checked":""}> ${esc(o)}</label>`).join("")+`</div>`;
+    case "checks": {
+      const arr=Array.isArray(v)?v:[];
+      return `<div class="opts col">`+f.opts.map(o=>`<label><input type="checkbox" data-k="${k}" data-multi="1" value="${esc(o)}" ${arr.includes(o)?"checked":""}> ${esc(o)}</label>`).join("")+`</div>`;
+    }
+    case "yn": {
+      let h=`<div class="opts">`+[SI,NO,NS].map(o=>`<label><input type="radio" name="${k}" data-k="${k}" value="${o}" ${v===o?"checked":""}> ${o}</label>`).join("")+`</div>`;
+      if(v===SI){
+        h+=`<div class="det"><div class="dl">${esc(f.det||"Descriva i fatti: che cosa, quando, chi era presente.")}</div><textarea data-k="${k}.det">${esc(val(k+".det"))}</textarea>`;
+        if(f.tempo){
+          const t=val(k+".t")||"";
+          h+=`<select data-k="${k}.t"><option value="">Quando si colloca il fatto?</option>`+["Prima delle nozze","Al momento delle nozze","Dopo le nozze","Prima e dopo le nozze"].map(o=>`<option ${t===o?"selected":""}>${o}</option>`).join("")+`</select>`;
+        }
+        h+=`</div>`;
+      }
+      return h;
+    }
+  }
+  return "";
+}
+function fieldBlock(s,f){
+  const flagged=isFieldFlagged(s,f);
+  let h=`<div class="q ${flagged?"flagged":""}"><label class="ql">${esc(f.label)}</label>`;
+  if(f.help) h+=`<div class="help">${esc(f.help)}</div>`;
+  const caps=new Set(f.capi||[]); if(f.flag) Object.values(f.flag).forEach(a=>a.forEach(c=>caps.add(c)));
+  if(caps.size) h+=`<div class="capi">`+[...caps].map(c=>`<span title="${esc(CAPI[c])}">${esc(CAPI[c].replace(/ \(.*\)$/,""))}</span>`).join("")+`</div>`;
+  if(f.dual){
+    h+=`<div class="dual">`+["d","c"].map(sd=>`<div class="side"><h4>${sd==="d"?esc(nameD())+" · dichiarante":esc(nameC())+" · coniuge"}</h4>${control(s,f,sd)}</div>`).join("")+`</div>`;
+  } else h+=control(s,f,null);
+  return h+`</div>`;
+}
+function shortBlock(s,f){
+  const c=control(s,f,null);
+  return `<div class="fieldsm"><label>${esc(f.label)}</label>${f.gen?`<div class="genrow">${c}<button id="genProt" title="Cognome dell'attore, data del colloquio, sigla del consulente">Genera protocollo</button></div>`:c}</div>`;
+}
+
+function renderSection(){
+  const wrap=document.getElementById("wrap");
+  if(cur==="report"){ renderReportView(); return; }
+  const s=S[cur];
+  let h=`<h1>${esc(s.title)}</h1>`;
+  if(s.intro) h+=`<p class="intro">${esc(s.intro)}</p>`;
+  if(s.special==="testi") h+=testiHTML();
+  else if(s.special==="val") h+=valHTML();
+  else{
+    // campi brevi raggruppati in griglia
+    let buf=[];
+    const flush=()=>{ if(buf.length){ h+=`<div class="q"><div class="row2">${buf.join("")}</div></div>`; buf=[]; } };
+    for(const f of s.fields){
+      if(f.showIf && !f.showIf()) continue;
+      if(f.short && !f.dual) buf.push(shortBlock(s,f));
+      else { flush(); h+=fieldBlock(s,f); }
+    }
+    flush();
+    if(s.id==="vita"){ const d=durata(); if(d) h+=`<div class="info">Durata della convivenza coniugale (dalle nozze alla separazione di fatto): <b>${esc(d.txt)}</b>${d.mesi<12?" — rilevante per l'art. 14 delle Regole procedurali.":""}</div>`; }
+  }
+  if(!s.special || s.special==="testi"){
+    const nk="_note."+s.id;
+    h+=`<div class="q note"><label class="ql">Osservazioni del consulente su questa sezione</label><div class="help">Impressioni, coerenza del racconto, punti da verificare. Entrano nel rapporto solo se lo si sceglie nella sezione Valutazione.</div><textarea data-k="${nk}">${esc(val(nk))}</textarea></div>`;
+  }
+  h+=`<div class="pager noprint"><button class="sec" data-go="${cur>0?cur-1:0}" ${cur===0?"style='visibility:hidden'":""}>← ${cur>0?esc(S[cur-1].title):""}</button>`+
+     (cur<S.length-1? `<button data-go="${cur+1}">${esc(S[cur+1].title)} →</button>` : `<button data-go="report">Rapporto per il Tribunale →</button>`)+`</div>`;
+  wrap.innerHTML=h;
+}
+
+/* ---------- testimoni ---------- */
+const TFIELDS=[["nome","Nome e cognome"],["rel","Relazione con le parti"],["eta","Età"],["recapito","Recapito"],["sa","Che cosa sa dei fatti"],["come","Come e quando lo ha saputo (prima o dopo le nozze?)"]];
+function testiHTML(){
+  let h=`<p class="intro">Per ciascuna persona indicare che cosa sa e quando l'ha saputo: le conoscenze acquisite prima delle nozze o in tempo non sospetto hanno maggior peso. Fratelli e sorelle, amici, sacerdoti, colleghi, medici.</p><div class="testi">`;
+  state.testi.forEach((t,i)=>{
+    h+=`<div class="t"><div class="hd"><span>Persona ${i+1}${t.nome?" – "+esc(t.nome):""}</span><button data-deltest="${i}">Rimuovi</button></div><div class="row3">`;
+    for(const [k,l] of TFIELDS.slice(0,3)) h+=`<div class="fieldsm"><label>${l}</label><input type="text" data-tk="${i}.${k}" value="${esc(t[k])}"></div>`;
+    h+=`</div><div class="grid-gap" style="margin-top:8px"><div class="fieldsm"><label>${TFIELDS[3][1]}</label><input type="text" data-tk="${i}.recapito" value="${esc(t.recapito)}"></div>`;
+    h+=`<div class="fieldsm"><label>${TFIELDS[4][1]}</label><textarea data-tk="${i}.sa">${esc(t.sa)}</textarea></div>`;
+    h+=`<div class="fieldsm"><label>${TFIELDS[5][1]}</label><input type="text" data-tk="${i}.come" value="${esc(t.come)}"></div></div></div>`;
+  });
+  return h+`</div><button class="btn sec small" id="addTest">+ Aggiungi persona</button>`;
+}
+
+/* ---------- valutazione ---------- */
+function valHTML(){
+  const fl=computeFlags(), by=flagsByCapo(fl), sug=suggestedA14(fl);
+  let h=`<div class="q ind"><label class="ql">Quadro degli elementi emersi</label><div class="help">Riepilogo automatico delle risposte segnalate, raggruppate per capo. È un promemoria per il consulente, non una valutazione.</div>`;
+  const keys=Object.keys(CAPI).filter(c=>by[c]);
+  if(!keys.length) h+=`<p style="margin:4px 0;color:var(--muted)">Nessun elemento segnalato finora.</p>`;
+  for(const c of keys){
+    h+=`<h3>${esc(CAPI[c])} · ${by[c].length}</h3><ul>`+by[c].map(x=>`<li>${esc(x.f.label)}${x.side?` <i>(${esc(SIDE_LBL[x.side].toLowerCase())})</i>`:""}${x.det&&x.f.type!=="yn"?": "+esc(x.det):""}</li>`).join("")+`</ul>`;
+  }
+  h+=`</div>`;
+  h+=`<div class="q"><label class="ql">Circostanze dell'art. 14 §1 delle Regole procedurali</label><div class="help">Utili a valutare il processo più breve davanti al Vescovo. Le voci con ◆ sono suggerite dalle risposte: confermarle solo se verificate.</div><div class="opts col">`;
+  for(const [k,l] of Object.entries(ART14)) h+=`<label><input type="checkbox" data-a14="${k}" ${state.a14[k]?"checked":""}> ${sug[k]?"<b style='color:var(--flag)'>◆</b> ":""}${esc(l)}</label>`;
+  h+=`</div></div>`;
+  const es=val("val.esito")||"";
+  h+=`<div class="q"><label class="ql">Esito del colloquio (facoltativo)</label><div class="opts col">`+
+     ["Non indicare","Sono emersi elementi che suggeriscono di procedere alla redazione del libello","Gli elementi emersi richiedono ulteriore approfondimento","Allo stato non sono emersi elementi sufficienti"].map(o=>`<label><input type="radio" name="val.esito" data-k="val.esito" value="${esc(o)}" ${es===o?"checked":""}> ${esc(o)}</label>`).join("")+`</div></div>`;
+  h+=`<div class="q"><label class="ql">Valutazione conclusiva del consulente</label><div class="help">Testo che compare nel rapporto. Il pulsante propone una bozza neutra a partire dagli elementi emersi, da rivedere e correggere.</div><textarea data-k="val.testo" style="min-height:200px">${esc(val("val.testo"))}</textarea><div style="margin-top:8px"><button class="btn sec small" id="bozza">Proponi una bozza</button></div></div>`;
+  h+=`<div class="q"><div class="row2"><div class="fieldsm"><label>Luogo della relazione</label><input type="text" data-k="val.luogo" value="${esc(val("val.luogo")||CONFIG.luogoFirma)}"></div><div class="fieldsm"><label>Data della relazione</label><input type="date" data-k="val.data" value="${esc(val("val.data")||new Date().toISOString().slice(0,10))}"></div></div>`+
+     `<label style="display:flex;gap:8px;margin-top:12px;font-size:14px"><input type="checkbox" data-k="val.includiNote" data-bool="1" ${val("val.includiNote")?"checked":""}> Includere nel rapporto le osservazioni del consulente scritte nelle singole sezioni</label></div>`;
+  return h;
+}
+function bozza(){
+  const fl=computeFlags(), by=flagsByCapo(fl), keys=Object.keys(CAPI).filter(c=>by[c]);
+  const data=fmtDate(val("proc.dataColl"));
+  let t=`Dal colloquio con ${nameD()}${data?", svoltosi il "+data:""}, `;
+  if(keys.length){
+    t+=`sono emersi elementi che, salvo il più approfondito esame del Tribunale, appaiono meritevoli di attenzione con riferimento ai seguenti possibili capi di nullità:\n`;
+    keys.forEach(c=>{ t+=`– ${CAPI[c]}\n`; });
+    t+=`\nTali elementi si fondano sulla dichiarazione della parte e richiedono riscontro mediante le deposizioni delle persone indicate`;
+    t+= state.testi.length? ` (${state.testi.length})` : "";
+    t+=` e la documentazione disponibile. Ogni valutazione sulla loro rilevanza giuridica resta rimessa al Tribunale.`;
+  } else {
+    t+=`non sono emersi, allo stato, elementi specifici riconducibili ai capi di nullità previsti dal Codice. Si resta a disposizione per un eventuale ulteriore approfondimento.`;
+  }
+  return t;
+}
+
+/* ================= RAPPORTO ================= */
+function answerText(s,f,side){
+  const k=fkey(s,f,side), v=val(k);
+  if(!filled(v)) return "";
+  if(f.type==="date") return esc(fmtDate(v));
+  if(f.type==="checks") return esc(v.join("; "));
+  if(f.type==="yn"){
+    let t=esc(v); const d=val(k+".det"), tm=val(k+".t");
+    if(tm) t+=` <i>(${esc(tm.toLowerCase())})</i>`;
+    if(filled(d)) t+=`. `+nl2br(d);
+    return t;
+  }
+  return nl2br(v);
+}
+function reportHTML(){
+  const fl=computeFlags(), by=flagsByCapo(fl), d=durata();
+  const prot=val("proc.prot"), parte=val("proc.parte");
+  let h=`<div class="r-head"><img class="r-logo" src="${LOGO}" width="90" height="92" alt="Logo"><div class="t1">${esc(CONFIG.tribunale)}</div><div class="t2">${esc(CONFIG.servizio)}</div><hr><div class="t3">RELAZIONE DI CONSULENZA PREGIUDIZIALE</div><div class="t4">${prot?"Prot. n. "+esc(prot)+" · ":""}Documento riservato</div></div>`;
+  h+=`<p>Il sottoscritto ${esc(CONFIG.consulente)}, consulente del ${esc(CONFIG.servizio)}, riferisce quanto emerso dal colloquio pregiudiziale${val("proc.dataColl")?" svoltosi il "+esc(fmtDate(val("proc.dataColl"))):""}${val("proc.luogoColl")?" presso "+esc(val("proc.luogoColl")):""} con ${esc(nameD())}${parte?", in qualità di "+(parte==="Attore"?"parte attrice":"parte convenuta"):""}, in ordine al matrimonio contratto con ${(val("coni.nome")||val("coni.cognome"))?esc(nameC()):"l'altro coniuge"}.</p>`;
+
+  // I. Dati
+  h+=`<div class="r-h2">I. Dati delle parti e del matrimonio</div>`;
+  let rows="";
+  const row=(l,a,b)=>{ if(filled(a)||filled(b)) rows+=`<tr><td>${l}</td><td>${esc(a||"")}</td><td>${esc(b||"")}</td></tr>`; };
+  row("Nascita",[fmtDate(val("dich.nascita")),val("dich.luogoNascita")].filter(Boolean).join(", "),[fmtDate(val("coni.nascita")),val("coni.luogoNascita")].filter(Boolean).join(", "));
+  row("Residenza",[val("dich.indirizzo"),val("dich.citta")].filter(Boolean).join(", "),val("coni.residenza"));
+  row("Titolo di studio",val("dich.studio"),"");
+  row("Professione",val("dich.professione"),val("coni.professione"));
+  row("Recapiti",[val("dich.tel"),val("dich.email")].filter(Boolean).join(" · "),val("coni.reperibile"));
+  row("Battesimo",val("dich.battesimo"),val("coni.battezzato"));
+  row("Parrocchia / diocesi",[val("dich.parrocchia"),val("dich.diocesi")].filter(Boolean).join(" – "),"");
+  if(rows) h+=`<table class="r-tab" style="margin-bottom:10px"><tr><th style="width:24%"></th><th>${esc(nameD())} – dichiarante</th><th>${esc(nameC())} – coniuge</th></tr>${rows}</table>`;
+  const mat=[];
+  if(val("cel.dataNozze")) mat.push("celebrato il "+fmtDate(val("cel.dataNozze")));
+  if(val("cel.luogoNozze")) mat.push("presso "+val("cel.luogoNozze"));
+  if(val("cel.celebrante")) mat.push("ministro celebrante "+val("cel.celebrante"));
+  if(val("cel.rito")) mat.push("forma: "+val("cel.rito").toLowerCase());
+  if(mat.length) h+=`<p class="r-q"><span class="rq">Matrimonio:</span> ${esc(mat.join(", "))}.</p>`;
+  if(val("cel.testiSposo")||val("cel.testiSposa")) h+=`<p class="r-q"><span class="rq">Testimoni di nozze:</span> ${esc([val("cel.testiSposo")&&"per lo sposo "+val("cel.testiSposo"), val("cel.testiSposa")&&"per la sposa "+val("cel.testiSposa")].filter(Boolean).join("; "))}.</p>`;
+  const sep=[];
+  if(val("vita.sepFatto")) sep.push("separazione di fatto "+fmtDate(val("vita.sepFatto")));
+  if(val("vita.sepLegale")) sep.push("separazione legale "+fmtDate(val("vita.sepLegale")));
+  if(val("vita.divorzio")) sep.push("divorzio "+fmtDate(val("vita.divorzio")));
+  if(sep.length) h+=`<p class="r-q"><span class="rq">Separazione:</span> ${esc(sep.join("; "))}.${d?" Durata della convivenza coniugale: "+esc(d.txt)+".":""}</p>`;
+  if(val("prole.figliComuni")) h+=`<p class="r-q"><span class="rq">Figli comuni:</span> ${answerText(S.find(s=>s.id==="prole"),S.find(s=>s.id==="prole").fields.find(f=>f.id==="figliComuni"),null)}</p>`;
+  if(val("coni.atteggiamento")) h+=`<p class="r-q"><span class="rq">Atteggiamento prevedibile dell'altra parte:</span> ${esc(val("coni.atteggiamento"))}.</p>`;
+
+  // II. Fatti
+  h+=`<div class="r-h2">II. Esposizione dei fatti</div><p class="r-obs">Quanto segue riporta le dichiarazioni rese da ${esc(nameD())}; ciò che riguarda l'altro coniuge è riferito dal dichiarante.</p>`;
+  const skip={cel:["dataNozze","luogoNozze","celebrante","rito","testiSposo","testiSposa"],vita:["sepFatto","sepLegale","divorzio"],prole:["figliComuni"]};
+  for(const sid of FACT_SECTIONS){
+    const s=S.find(x=>x.id===sid); let body="";
+    for(const f of s.fields){
+      if(skip[sid]&&skip[sid].includes(f.id)) continue;
+      if(f.dual){
+        const a=answerText(s,f,"d"), b=answerText(s,f,"c");
+        if(a||b) body+=`<div class="r-q"><span class="rq">${esc(rlab(f.label))}</span><br>${a?`<u>${esc(nameD())}</u>: ${a}<br>`:""}${b?`<u>${esc(nameC())}</u>: ${b}`:""}</div>`;
+      } else {
+        const a=answerText(s,f,null);
+        if(a) body+=`<div class="r-q"><span class="rq">${esc(rlab(f.label))}</span><br>${a}</div>`;
+      }
+    }
+    const note=val("_note."+sid);
+    if((FORCE_NOTES||val("val.includiNote")) && filled(note)) body+=`<p class="r-q r-obs">Osservazioni del consulente: ${nl2br(note)}</p>`;
+    if(body) h+=`<div class="r-h3">${esc(s.title)}</div>`+body;
+  }
+
+  // III. Elementi per capo
+  const keys=Object.keys(CAPI).filter(c=>by[c]);
+  h+=`<div class="r-h2">III. Elementi emersi in relazione ai possibili capi di nullità</div>`;
+  if(keys.length){
+    h+=`<p class="r-obs">Quadro ricognitivo delle dichiarazioni, senza valutazione di merito.</p>`;
+    for(const c of keys){
+      h+=`<div class="r-h3">${esc(CAPI[c])}</div><ul>`+by[c].map(x=>{
+        let t=esc(rlab(x.f.label).replace(/\?$/,""));
+        if(x.side) t+=` – <i>${esc(x.side==="d"?nameD():nameC())}</i>`;
+        if(x.f.type==="yn"){ if(x.t) t+=` (${esc(x.t.toLowerCase())})`; if(filled(x.det)) t+=`: ${nl2br(x.det)}`; }
+        else if(x.det) t+=`: ${esc(x.det)}`;
+        return `<li>${t}</li>`;
+      }).join("")+`</ul>`;
+    }
+  } else h+=`<p>Dal colloquio non sono emersi elementi specificamente segnalati.</p>`;
+
+  // IV. Art. 14
+  const a14=Object.keys(ART14).filter(k=>state.a14[k]);
+  if(a14.length){
+    h+=`<div class="r-h2">IV. Circostanze di cui all'art. 14 §1 delle Regole procedurali</div><ul>`+a14.map(k=>`<li>${esc(ART14[k])}</li>`).join("")+`</ul>`;
+  }
+  // V. Testi
+  const n=a14.length?["V","VI","VII"]:["IV","V","VI"];
+  h+=`<div class="r-h2">${n[0]}. Persone informate sui fatti</div>`;
+  if(state.testi.length){
+    h+=`<table class="r-tab"><tr><th>Nome</th><th>Relazione · età · recapito</th><th>Conoscenza dei fatti</th></tr>`+
+      state.testi.map(t=>`<tr><td>${esc(t.nome)}</td><td>${esc([t.rel,t.eta&&t.eta+" anni",t.recapito].filter(Boolean).join(" · "))}</td><td>${nl2br(t.sa)}${t.come?`<br><i>Fonte e tempo: ${esc(t.come)}</i>`:""}</td></tr>`).join("")+`</table>`;
+  } else h+=`<p>Non indicate.</p>`;
+  if(val("_note.testi") && (FORCE_NOTES||val("val.includiNote"))) h+=`<p class="r-obs">Osservazioni del consulente: ${nl2br(val("_note.testi"))}</p>`;
+  // VI. Documenti
+  h+=`<div class="r-h2">${n[1]}. Documentazione</div>`;
+  const docs=val("doc.documenti");
+  h+= filled(docs)? `<ul>`+docs.map(x=>`<li>${esc(x)}</li>`).join("")+`</ul>` : `<p>Non indicata.</p>`;
+  if(filled(val("doc.documentiDet"))) h+=`<p>${nl2br(val("doc.documentiDet"))}</p>`;
+  // VII. Valutazione
+  h+=`<div class="r-h2">${n[2]}. Valutazione del consulente</div>`;
+  h+= filled(val("val.testo"))? `<p>${nl2br(val("val.testo"))}</p>` : `<p><i>[Valutazione da completare]</i></p>`;
+  const es=val("val.esito"); if(es && es!=="Non indicare") h+=`<p><b>Esito del colloquio:</b> ${esc(es)}.</p>`;
+  h+=`<div class="r-sign"><div>${esc(val("val.luogo")||CONFIG.luogoFirma)}, ${esc(fmtDate(val("val.data")||new Date().toISOString().slice(0,10)))}</div><div style="text-align:center">Il Consulente<br>${esc(CONFIG.consulente)}<br><br>_____________________________</div></div>`;
+  h+=`<div class="r-foot">Documento riservato, contenente dati personali anche di natura particolare, redatto ad uso esclusivo del ${esc(CONFIG.tribunale)}. Le dichiarazioni riportate sono quelle rese dalla parte nel colloquio pregiudiziale e non hanno valore di deposizione giudiziale.</div>`;
+  return h;
+}
+function renderReportView(){
+  document.getElementById("wrap").innerHTML=`<h1 class="noprint">Rapporto per il Tribunale</h1><p class="intro noprint">Anteprima della relazione. Le sezioni senza risposte non compaiono. Per correggere, tornare alle sezioni del colloquio.</p>
+  <div class="reportbar"><button class="btn" id="bWord">Scarica relazione per il Tribunale (Word)</button><button class="btn" id="bPrint">Stampa o salva in PDF</button></div>
+  ${!filled(val("val.testo"))?`<div class="warn noprint">La valutazione conclusiva non è ancora stata scritta (sezione «Valutazione del consulente»).</div>`:""}
+  <div id="report">${reportHTML()}</div>`;
+}
+function fileBase(){ const c=(val("dich.cognome")||"pratica").replace(/[^\wÀ-ÿ]+/g,"_"); const p=(val("proc.prot")||"").replace(/[^\w]+/g,"-"); return "Relazione_"+c+(p?"_"+p:""); }
+function download(name,blob){ const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
+/* ---------- esportazione .docx (Office Open XML, senza librerie) ---------- */
+const XE = t => String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function runsOf(node, st, out){
+  for(const n of node.childNodes){
+    if(n.nodeType===3){ const t=n.nodeValue.replace(/\s+/g," "); if(t) out.push({t,...st}); continue; }
+    if(n.nodeType!==1) continue;
+    const tag=n.tagName;
+    if(tag==="BR"){ out.push({br:true}); continue; }
+    const s2={...st};
+    if(tag==="B"||tag==="STRONG"||n.classList.contains("rq")) s2.b=true;
+    if(tag==="I"||tag==="EM"||n.classList.contains("r-obs")) s2.i=true;
+    if(tag==="U") s2.u=true;
+    runsOf(n,s2,out);
+  }
+  return out;
+}
+function runXML(r, base){
+  if(r.br) return `<w:r><w:br/></w:r>`;
+  const b=r.b||base.b, i=r.i||base.i, sz=base.sz||24;
+  return `<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>${b?"<w:b/>":""}${i?"<w:i/>":""}${r.u?'<w:u w:val="single"/>':""}${base.caps?"<w:caps/>":""}${base.color?`<w:color w:val="${base.color}"/>`:""}<w:sz w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${XE(r.t)}</w:t></w:r>`;
+}
+function pXML(runs, o={}){
+  // elimina spazi iniziali/finali
+  while(runs.length && runs[0].t!=null && !runs[0].t.trim()) runs.shift();
+  if(runs.length && runs[0].t) runs[0]={...runs[0],t:runs[0].t.replace(/^\s+/,"")};
+  const ppr=`<w:pPr>${o.keepNext?"<w:keepNext/>":""}${o.borderBottom?'<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="808080"/></w:pBdr>':""}${o.borderTop?'<w:pBdr><w:top w:val="single" w:sz="4" w:space="4" w:color="808080"/></w:pBdr>':""}<w:spacing w:before="${o.before||0}" w:after="${o.after==null?120:o.after}"/>${o.ind?`<w:ind w:left="${o.ind}" w:hanging="${o.hang||0}"/>`:""}${o.jc?`<w:jc w:val="${o.jc}"/>`:""}</w:pPr>`;
+  return `<w:p>${ppr}${runs.map(r=>runXML(r,o)).join("")}</w:p>`;
+}
+function paras(runs,o={}){
+  const segs=[[]]; for(const r of runs){ if(r.br) segs.push([]); else segs[segs.length-1].push(r); }
+  const keep=segs.filter((g,i)=>g.length||i===0);
+  return keep.map((g,i)=>pXML(g,{...o, after: i<keep.length-1?0:(o.after==null?120:o.after), keepNext: o.keepNext||i<keep.length-1})).join("");
+}
+function cellXML(html, w, o={}){
+  const d=document.createElement("div"); d.innerHTML=html;
+  return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${o.shade?'<w:shd w:val="clear" w:color="auto" w:fill="EEEEEE"/>':""}</w:tcPr>${paras(runsOf(d,{b:o.b},[]),{sz:o.sz||21,after:40,jc:o.jc})}</w:tc>`;
+}
+function tableXML(tbl){
+  const rows=[...tbl.rows]; const nc=Math.max(...rows.map(r=>r.cells.length)); const total=9638;
+  const widths = nc===3? [2300,3669,3669] : Array(nc).fill(Math.floor(total/nc));
+  const brd='<w:tblBorders>'+["top","left","bottom","right","insideH","insideV"].map(x=>`<w:${x} w:val="single" w:sz="4" w:space="0" w:color="888888"/>`).join("")+'</w:tblBorders>';
+  let x=`<w:tbl><w:tblPr><w:tblW w:w="${total}" w:type="dxa"/>${brd}<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${widths.map(w=>`<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>`;
+  for(const r of rows){ x+="<w:tr>"+[...r.cells].map((c,i)=>cellXML(c.innerHTML,widths[i],{shade:c.tagName==="TH",b:c.tagName==="TH"})).join("")+"</w:tr>"; }
+  return x+`</w:tbl>`+pXML([],{after:120});
+}
+function signXML(){
+  const left=`${val("val.luogo")||CONFIG.luogoFirma}, ${fmtDate(val("val.data")||new Date().toISOString().slice(0,10))}`;
+  const nob='<w:tblBorders>'+["top","left","bottom","right","insideH","insideV"].map(x=>`<w:${x} w:val="nil"/>`).join("")+'</w:tblBorders>';
+  const c=(inner,w)=>`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/></w:tcPr>${inner}</w:tc>`;
+  const right=[pXML([{t:"Il Consulente"}],{jc:"center",after:0}),pXML([{t:CONFIG.consulente}],{jc:"center",after:480}),pXML([{t:"_____________________________"}],{jc:"center",after:0})].join("");
+  return `<w:tbl><w:tblPr><w:tblW w:w="9638" w:type="dxa"/>${nob}</w:tblPr><w:tblGrid><w:gridCol w:w="5200"/><w:gridCol w:w="4438"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/></w:trPr>${c(pXML([{t:left}],{after:0}),5200)}${c(right,4438)}</w:tr></w:tbl>`+pXML([],{after:240});
+}
+function bodyXML(){
+  const root=document.createElement("div"); root.innerHTML=reportHTML();
+  let x="";
+  const walk=el=>{
+    for(const n of el.children){
+      const c=n.classList;
+      if(c.contains("r-head")){
+        x+=`<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="120"/></w:pPr><w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="1080000" cy="1098000"/><wp:docPr id="1" name="Logo"/><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="1" name="logo.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="rIdLogo"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="1080000" cy="1098000"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+        x+=pXML([{t:CONFIG.tribunale}],{jc:"center",b:true,caps:true,sz:25,after:20});
+        x+=pXML([{t:CONFIG.servizio}],{jc:"center",i:true,sz:20,after:120,borderBottom:true});
+        x+=pXML([{t:"Relazione di consulenza pregiudiziale"}],{jc:"center",b:true,caps:true,sz:23,before:200,after:20});
+        x+=pXML([{t:n.querySelector(".t4").textContent}],{jc:"center",sz:20,after:300});
+      }
+      else if(c.contains("r-h2")) x+=pXML(runsOf(n,{},[]),{b:true,caps:true,sz:22,before:280,after:120,borderBottom:true,keepNext:true});
+      else if(c.contains("r-h3")) x+=pXML(runsOf(n,{},[]),{b:true,i:true,sz:22,before:160,after:60,keepNext:true});
+      else if(c.contains("r-sign")) x+=signXML();
+      else if(c.contains("r-foot")) x+=paras(runsOf(n,{},[]),{i:true,sz:18,before:300,borderTop:true});
+      else if(n.tagName==="TABLE") x+=tableXML(n);
+      else if(n.tagName==="UL") for(const li of n.children) x+=paras([{t:"•\t"},...runsOf(li,{},[])],{ind:360,hang:360,after:60});
+      else if(n.tagName==="P"||c.contains("r-q")) x+=paras(runsOf(n,c.contains("r-obs")?{i:true}:{},[]),{jc:"both"});
+      else walk(n);
+    }
+  };
+  walk(root);
+  return x;
+}
+/* zip "store" con CRC32 */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u){let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=CRC[(c^u[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function zip(files){
+  const enc=new TextEncoder(), parts=[], cd=[]; let off=0;
+  const u16=v=>[v&255,(v>>>8)&255], u32=v=>[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255];
+  for(const f of files){
+    const name=enc.encode(f.name), data=typeof f.data==="string"? enc.encode(f.data) : f.data, crc=crc32(data);
+    const lh=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0)]);
+    parts.push(lh,name,data);
+    cd.push(new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(crc),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),name);
+    off+=lh.length+name.length+data.length;
+  }
+  const cdSize=cd.reduce((a,b)=>a+b.length,0);
+  const end=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(files.length),...u16(files.length),...u32(cdSize),...u32(off),...u16(0)]);
+  return new Blob([...parts,...cd,end],{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+}
+/* Un solo generatore .docx. embed=true -> file di lavoro con i dati della pratica nascosti dentro */
+const PRATICA_NS="urn:tep:colloquio:v1";
+function b64utf8(str){ const u=new TextEncoder().encode(str); let bin=""; for(let i=0;i<u.length;i+=0x8000) bin+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000)); return btoa(bin); }
+function utf8b64(b64){ const bin=atob(b64.replace(/\s+/g,"")); const u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new TextDecoder().decode(u); }
+function buildDocx(embed){
+  const img=Uint8Array.from(atob(LOGO.split(",")[1]),c=>c.charCodeAt(0));
+  let body;
+  FORCE_NOTES=embed;
+  try{ body=bodyXML(); } finally{ FORCE_NOTES=false; }
+  if(embed){
+    body = pXML([{t:"FILE DI LAVORO DEL CONSULENTE – PRATICA "+(val("proc.prot")||"")}],{jc:"center",b:true,sz:20,color:"9A5B00",after:20})
+         + pXML([{t:"Contiene, oltre al testo, i dati per riaprire e continuare la pratica con lo strumento di colloquio (pulsante «Apri pratica»). Include le osservazioni riservate del consulente: non inviarlo al Tribunale; per il Tribunale usare «Scarica relazione per il Tribunale»."}],{jc:"center",i:true,sz:18,color:"9A5B00",after:240,borderBottom:true})
+         + body;
+  }
+  const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="567" w:footer="567" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+  const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:lang w:val="it-IT"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style></w:styles>`;
+  const ct=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>${embed?'<Override PartName="/customXml/itemProps1.xml" ContentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml"/>':""}</Types>`;
+  const rels=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdStyles" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rIdLogo" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/logo.png"/>${embed?'<Relationship Id="rIdPratica" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" Target="../customXml/item1.xml"/>':""}</Relationships>`;
+  const files=[
+    {name:"[Content_Types].xml",data:ct},
+    {name:"_rels/.rels",data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`},
+    {name:"word/_rels/document.xml.rels",data:rels},
+    {name:"word/document.xml",data:doc},
+    {name:"word/styles.xml",data:styles},
+    {name:"word/media/logo.png",data:img}
+  ];
+  if(embed){
+    const payload=JSON.stringify({...state, salvato:new Date().toISOString()});
+    files.push(
+      {name:"customXml/item1.xml",data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><praticaColloquio xmlns="${PRATICA_NS}">${b64utf8(payload)}</praticaColloquio>`},
+      {name:"customXml/itemProps1.xml",data:`<?xml version="1.0" encoding="UTF-8" standalone="no"?><ds:datastoreItem ds:itemID="{6B1E2A40-7C3D-4F5E-9A1B-2C3D4E5F6A70}" xmlns:ds="http://schemas.openxmlformats.org/officeDocument/2006/customXml"><ds:schemaRefs><ds:schemaRef ds:uri="${PRATICA_NS}"/></ds:schemaRefs></ds:datastoreItem>`},
+      {name:"customXml/_rels/item1.xml.rels",data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps" Target="itemProps1.xml"/></Relationships>`}
+    );
+  }
+  return zip(files);
+}
+let FORCE_NOTES=false;
+function protFile(){ return (val("proc.prot")||"").trim().replace(/[\/\\:*?"<>|]+/g,"-").replace(/\s+/g,"_"); }
+function exportWord(){ download("Relazione_"+(protFile()||"senza_protocollo")+".docx", buildDocx(false)); }
+
+/* lettura di un .docx salvato dallo strumento (anche se riaperto e salvato da Word) */
+async function unzipEntries(buf){
+  const dv=new DataView(buf), u8=new Uint8Array(buf);
+  let eocd=-1; for(let i=buf.byteLength-22;i>=Math.max(0,buf.byteLength-66000);i--){ if(dv.getUint32(i,true)===0x06054b50){ eocd=i; break; } }
+  if(eocd<0) throw new Error("zip");
+  const n=dv.getUint16(eocd+10,true); let p=dv.getUint32(eocd+16,true); const out=[];
+  for(let k=0;k<n;k++){
+    if(dv.getUint32(p,true)!==0x02014b50) throw new Error("cd");
+    const method=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true), nlen=dv.getUint16(p+28,true), elen=dv.getUint16(p+30,true), clen=dv.getUint16(p+32,true), off=dv.getUint32(p+42,true);
+    const name=new TextDecoder().decode(u8.subarray(p+46,p+46+nlen));
+    out.push({name,method,csize,off}); p+=46+nlen+elen+clen;
+  }
+  const read=async e=>{
+    const ln=dv.getUint16(e.off+26,true), le=dv.getUint16(e.off+28,true), start=e.off+30+ln+le;
+    const raw=u8.subarray(start,start+e.csize);
+    if(e.method===0) return new TextDecoder().decode(raw);
+    if(e.method===8){
+      if(typeof DecompressionStream==="undefined") throw new Error("nodecomp");
+      const ds=new DecompressionStream("deflate-raw");
+      const stream=new Blob([raw]).stream().pipeThrough(ds);
+      return await new Response(stream).text();
+    }
+    throw new Error("method");
+  };
+  return {entries:out, read};
+}
+async function readPraticaFromDocx(buf){
+  const z=await unzipEntries(buf);
+  for(const e of z.entries.filter(e=>/^customXml\/item\d+\.xml$/i.test(e.name))){
+    const t=await z.read(e);
+    if(t.includes(PRATICA_NS)){ const m=t.match(/<praticaColloquio[^>]*>([\s\S]*?)<\/praticaColloquio>/); if(m) return JSON.parse(utf8b64(m[1])); }
+  }
+  return null;
+}
+
+/* ---------- salvataggio della pratica ---------- */
+function protCandidate(){
+  const attoreCon = val("proc.parte")==="Convenuto";
+  const cogn = ((attoreCon? val("coni.cognome") : val("dich.cognome")) || "").trim();
+  if(!cogn) return null;
+  const d = val("proc.dataColl") || new Date().toISOString().slice(0,10);
+  return cogn.replace(/\s+/g,"") + "_" + d.replace(/-/g,"/") + "_" + CONFIG.sigla;
+}
+async function salvaPratica(){
+  if(!filled(val("proc.prot"))){
+    const c=protCandidate();
+    if(!c){ await notify("Per salvare la pratica serve il protocollo, che dà il nome al file.\n\nNella sezione «Dati della pratica» indichi se il dichiarante è attore o convenuto e il cognome dell'attore: il protocollo verrà generato automaticamente."); go(0); return; }
+    state.v["proc.prot"]=c; persist(); renderNav(); if(cur===0) renderSection();
+  }
+  const name=protFile()+".docx";
+  download(name, buildDocx(true));
+  state.salvatoIl=new Date().toISOString(); persist();
+  const vuote=S.filter(s=>s.fields && !["proc","doc"].includes(s.id) && sectionProgress(s).n===0).map(s=>"– "+s.title);
+  if(!filled(val("val.testo"))) vuote.push("– Valutazione del consulente");
+  setStatus("Pratica salvata: "+name);
+  await notify("Pratica salvata nel file «"+name+"» (di solito nella cartella Download).\n\n"+(vuote.length? "Sezioni ancora senza risposte:\n"+vuote.join("\n")+"\n\nPotrà completarle riaprendo il file con «Apri pratica»." : "Tutte le sezioni contengono almeno una risposta."));
+}
+
+/* ================= FINESTRE DI DIALOGO INTERNE =================
+   (al posto di confirm/alert, che alcune anteprime bloccano) */
+function ask(msg, okLabel, cancelLabel){
+  return new Promise(res=>{
+    const bg=document.createElement("div"); bg.className="modal-bg noprint";
+    bg.innerHTML=`<div class="modal" role="dialog" aria-modal="true"><p>${esc(msg)}</p><div class="mb">${cancelLabel===null?"":`<button class="btn sec" data-r="0">${esc(cancelLabel||"Annulla")}</button>`}<button class="btn" data-r="1">${esc(okLabel||"OK")}</button></div></div>`;
+    const done=v=>{ bg.remove(); document.removeEventListener("keydown",kd,true); res(v); };
+    const kd=e=>{ if(e.key==="Escape"){ e.stopPropagation(); done(false); } };
+    bg.addEventListener("click",e=>{ e.stopPropagation(); const b=e.target.closest("[data-r]"); if(b) done(b.dataset.r==="1"); else if(e.target===bg) done(false); });
+    document.addEventListener("keydown",kd,true);
+    document.body.appendChild(bg); bg.querySelector('[data-r="1"]').focus();
+  });
+}
+const notify = msg => ask(msg,"OK",null);
+
+/* ================= PROTOCOLLO ================= */
+async function genProtocollo(){
+  const attoreCon = val("proc.parte")==="Convenuto";   // se il dichiarante è convenuto, l'attore è l'altro coniuge
+  const cogn = (attoreCon? val("coni.cognome") : val("dich.cognome")) || "";
+  if(!cogn.trim()){
+    notify("Per generare il protocollo serve il cognome dell'attore.\n\nIndichi se il dichiarante è attore o convenuto e inserisca il cognome nella sezione «"+(attoreCon?"L'altro coniuge":"Il dichiarante")+"».");
+    return;
+  }
+  const d = val("proc.dataColl") || new Date().toISOString().slice(0,10);
+  const prot = cogn.trim().replace(/\s+/g,"") + "_" + d.replace(/-/g,"/") + "_" + CONFIG.sigla;
+  if(filled(val("proc.prot")) && val("proc.prot")!==prot && !(await ask("Sostituire il protocollo attuale «"+val("proc.prot")+"» con «"+prot+"»?","Sostituisci"))) return;
+  state.v["proc.prot"]=prot; persist(); renderSection(); renderNav();
+}
+
+/* ================= ASPETTO (chiaro / scuro) ================= */
+const TH_KEY="tep_colloquio_tema";
+const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+function themePref(){ try{ return localStorage.getItem(TH_KEY)||"auto"; }catch(e){ return "auto"; } }
+function applyTheme(){
+  const p=themePref(), dark = p==="dark" || (p==="auto" && mq && mq.matches);
+  document.documentElement.setAttribute("data-theme", dark?"dark":"light");
+  document.querySelectorAll("[data-theme-set]").forEach(b=>b.classList.toggle("on", b.dataset.themeSet===p));
+}
+if(mq){ (mq.addEventListener? mq.addEventListener("change",applyTheme) : mq.addListener(applyTheme)); }
+
+/* ================= EVENTI ================= */
+function go(to){ cur = to==="report"? "report" : +to; renderNav(); renderSection(); document.getElementById("main").scrollTop=0; }
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){ go(g.dataset.go); return; }
+  const ts=e.target.closest("[data-theme-set]"); if(ts){ try{ localStorage.setItem(TH_KEY, ts.dataset.themeSet); }catch(err){} applyTheme(); return; }
+  const id=e.target.id;
+  if(id==="genProt"){ genProtocollo(); return; }
+  if(id==="addTest"){ state.testi.push({}); persist(); renderSection(); renderNav(); return; }
+  if(e.target.dataset.deltest!=null){ const i=+e.target.dataset.deltest; ask("Rimuovere questa persona dall'elenco?","Rimuovi").then(ok=>{ if(ok){ state.testi.splice(i,1); persist(); renderSection(); renderNav(); } }); return; }
+  if(id==="bozza"){ const put=()=>{ state.v["val.testo"]=bozza(); persist(); renderSection(); renderNav(); }; if(!filled(val("val.testo"))) put(); else ask("Sostituire il testo attuale della valutazione con una nuova bozza?","Sostituisci").then(ok=>{ if(ok) put(); }); return; }
+  if(id==="bWord"){ exportWord(); return; }
+  if(id==="bPrint"){ window.print(); return; }
+  if(id==="bSave"){ salvaPratica(); return; }
+  if(id==="bOpen"){ document.getElementById("fileIn").click(); return; }
+  if(id==="bNew"){ ask("Iniziare una nuova pratica?\n\nIl modulo verrà svuotato: se non ha ancora usato «Salva pratica (Word)», i dati della pratica attuale andranno persi.","Inizia nuova pratica").then(ok=>{ if(ok){ state=blank(); persist(); go(0); setStatus("Nuova pratica iniziata"); } }); return; }
+});
+document.getElementById("fileIn").addEventListener("change",e=>{
+  const f=e.target.files[0]; if(!f) return;
+  e.target.value="";
+  const apri=o=>{ state=Object.assign(blank(),o); persist(); go(0); setStatus("Pratica aperta: "+f.name); };
+  const conferma=o=>{ if(filled(val("proc.prot"))||filled(val("dich.cognome"))) ask("Aprire la pratica «"+((o.v&&o.v["proc.prot"])||f.name)+"»?\n\nLa pratica ora sullo schermo verrà sostituita: se non l'ha salvata, i dati andranno persi.","Apri").then(ok=>{ if(ok) apri(o); }); else apri(o); };
+  f.arrayBuffer().then(async buf=>{
+    let o=null;
+    try{
+      if(/\.json$/i.test(f.name)) o=JSON.parse(new TextDecoder().decode(buf));
+      else o=await readPraticaFromDocx(buf);
+    }catch(err){
+      if(String(err&&err.message)==="nodecomp"){ notify("Questo browser non riesce a leggere il file. Apra lo strumento con una versione aggiornata di Chrome, Edge, Firefox o Safari."); return; }
+      o=null;
+    }
+    if(!o||!o.v){ notify("Il file «"+f.name+"» non contiene una pratica salvata con questo strumento.\n\nSi possono aprire solo i file creati con «Salva pratica (Word)». La relazione per il Tribunale non contiene i dati della pratica."); return; }
+    conferma(o);
+  });
+});
+function onField(e){
+  const el=e.target;
+  if(el.dataset.k){
+    const k=el.dataset.k;
+    if(el.dataset.multi){ const arr=new Set(Array.isArray(state.v[k])?state.v[k]:[]); el.checked?arr.add(el.value):arr.delete(el.value); state.v[k]=[...arr]; }
+    else if(el.dataset.bool) state.v[k]=el.checked;
+    else state.v[k]=el.value;
+    persist();
+    if(el.type==="radio"||el.type==="checkbox"){ if(e.type==="change"){ const y=document.getElementById("main").scrollTop; renderSection(); renderNav(); document.getElementById("main").scrollTop=y; } }
+    else if(e.type==="change") renderNav();
+  } else if(el.dataset.tk){
+    const [i,f]=el.dataset.tk.split("."); state.testi[+i][f]=el.value; persist();
+    if(e.type==="change") renderNav();
+  } else if(el.dataset.a14){
+    state.a14[el.dataset.a14]=el.checked; persist();
+  }
+}
+document.addEventListener("input",e=>{ if(e.target.type!=="radio"&&e.target.type!=="checkbox") onField(e); });
+document.addEventListener("change",onField);
+
+window.addEventListener("pagehide",()=>{ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} });
+window.addEventListener("beforeunload",()=>{ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} });
+/* ================= IMPOSTAZIONI DEL CONSULENTE (per dispositivo) ================= */
+const SET_KEY="tep_colloquio_impostazioni";
+function loadSettings(){ try{ const o=JSON.parse(localStorage.getItem(SET_KEY)||"null"); if(o){ ["consulente","sigla","servizio","luogoFirma"].forEach(k=>{ if(o[k]) CONFIG[k]=o[k]; }); return true; } }catch(e){} return false; }
+function showSettingsInBrand(){ document.getElementById("brandSub").textContent=CONFIG.servizio; document.getElementById("brandCons").textContent="Consulente: "+CONFIG.consulente+" ("+CONFIG.sigla+")"; }
+function openSettings(primo){
+  const bg=document.createElement("div"); bg.className="modal-bg noprint";
+  const vuoto = primo ? {consulente:"",sigla:""} : {};
+  const F=(k,l,h,ph)=>`<div class="fieldsm"><label>${l}</label><input type="text" data-set="${k}" placeholder="${esc(ph||"")}" value="${esc(k in vuoto? vuoto[k] : CONFIG[k])}">${h?`<div class="help" style="margin-top:3px">${h}</div>`:""}</div>`;
+  bg.innerHTML=`<div class="modal" role="dialog" aria-modal="true" style="max-width:520px"><h2>Impostazioni del consulente</h2><p style="margin-bottom:12px;color:var(--muted);font-size:13.5px">${primo?"Prima di iniziare, inserisca i suoi dati: compariranno nelle relazioni e nel protocollo. ":""}Restano memorizzati su questo dispositivo e si possono cambiare in ogni momento.</p>
+  ${F("consulente","Nome del consulente, come deve comparire nella firma","Es. «d. Mario Ansaldi», «dott.ssa Anna Rossi»","Titolo, nome e cognome")}
+  ${F("sigla","Sigla per il protocollo","Le iniziali, es. MA","Iniziali")}
+  ${F("servizio","Servizio di appartenenza")}
+  ${F("luogoFirma","Luogo di redazione della relazione")}
+  <div class="mb">${primo?"":`<button class="btn sec" data-r="0">Annulla</button>`}<button class="btn" data-r="1">Salva impostazioni</button></div></div>`;
+  const close=()=>bg.remove();
+  bg.addEventListener("click",e=>{
+    e.stopPropagation();
+    const b=e.target.closest("[data-r]"); if(!b) return;
+    if(b.dataset.r==="1"){
+      const o={}; bg.querySelectorAll("[data-set]").forEach(i=>o[i.dataset.set]=i.value.trim());
+      if(!o.consulente||!o.sigla){ bg.querySelector(o.consulente?'[data-set="sigla"]':'[data-set="consulente"]').focus(); return; }
+      o.sigla=o.sigla.toUpperCase().replace(/[^A-Z0-9]/g,"");
+      Object.assign(CONFIG,o); try{ localStorage.setItem(SET_KEY,JSON.stringify(o)); }catch(err){}
+      showSettingsInBrand(); if(cur==="report") renderSection(); setStatus("Impostazioni salvate");
+    }
+    close();
+  });
+  document.body.appendChild(bg); bg.querySelector("[data-set]").focus();
+}
+document.getElementById("bSet").addEventListener("click",e=>{ e.stopPropagation(); openSettings(false); });
+
+/* ================= VERSIONE WEB: funzionamento offline e installazione ================= */
+if("serviceWorker" in navigator && /^https?:$/.test(location.protocol) && document.querySelector('link[rel="manifest"]')){
+  window.addEventListener("load",()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
+}
+
+applyTheme();
+document.getElementById("brandLogo").src=LOGO;
+const haSettings=loadSettings(); showSettingsInBrand();
+load(); go(0);
+if(!haSettings) openSettings(true);
+</script>
+</body>
+</html>

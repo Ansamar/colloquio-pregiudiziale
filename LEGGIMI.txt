@@ -1,0 +1,51 @@
+COLLOQUIO PREGIUDIZIALE – VERSIONE WEB
+Tribunale Ecclesiastico Partenopeo
+
+Questa cartella contiene lo strumento di colloquio in versione "pagina web
+installabile". Una volta pubblicata, ogni consulente lo apre da un indirizzo
+internet con qualunque dispositivo (Windows, Mac, Chromebook, tablet) e può
+installarlo come un'app, che poi funziona anche senza connessione.
+
+I DATI DELLE PRATICHE NON VENGONO MAI INVIATI AL SITO: restano nel browser
+del dispositivo del consulente e nei file Word che lui stesso salva.
+
+
+1. PUBBLICARE LA CARTELLA (una sola volta)
+
+Opzione A – Sito della diocesi o del Tribunale
+  Consegnare la cartella al responsabile del sito, chiedendo di pubblicarla
+  così com'è in un indirizzo dedicato, ad esempio:
+  https://www.sito-diocesi.it/colloquio/
+  L'indirizzo deve iniziare con https.
+
+Opzione B – GitHub Pages (gratuito)
+  1. Creare un account su https://github.com
+  2. Creare un nuovo repository (es. "colloquio"), anche privato se si ha
+     un piano che lo consente, altrimenti pubblico: il codice non contiene
+     dati personali.
+  3. "Add file" > "Upload files": trascinare TUTTI i file di questa cartella
+     (non la cartella stessa) e confermare con "Commit changes".
+  4. Settings > Pages > Branch: "main", cartella "/ (root)" > Save.
+  5. Dopo un paio di minuti l'indirizzo sarà:
+     https://NOME-UTENTE.github.io/colloquio/
+
+
+2. COME LO USANO I CONSULENTI
+
+  - Aprire l'indirizzo con Chrome, Edge o Safari.
+  - Al primo avvio inserire nome e sigla del consulente (Impostazioni).
+  - Per installarlo come app:
+      Chrome / Edge / Chromebook: icona "Installa" nella barra dell'indirizzo
+                                  (oppure menu ⋮ > "Installa app").
+      iPad / iPhone (Safari):     Condividi > "Aggiungi alla schermata Home".
+  - Salvare sempre la pratica con "Salva pratica (Word)": il file finisce
+    nella cartella Download (sul Chromebook: app "File" > Download).
+  - Per riprendere una pratica: "Apri pratica" e scegliere quel file Word.
+
+
+3. AGGIORNARE LO STRUMENTO
+
+  Sostituire index.html con la nuova versione e, nel file sw.js, cambiare
+  la riga  const VERSIONE = "colloquio-v1";  in "colloquio-v2", "colloquio-v3"
+  e così via. I dispositivi riceveranno l'aggiornamento alla prossima
+  apertura con connessione.
