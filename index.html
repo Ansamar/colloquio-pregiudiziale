@@ -3,10 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#7a1f2b">
-<link rel="icon" href="icona-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script>
+/* manifest e icone solo se la pagina è aperta da un indirizzo web:
+   aperta da file (o da dentro uno .zip) non genera errori di caricamento */
+if(/^https?:$/.test(location.protocol)){
+  [["manifest","manifest.webmanifest"],["icon","icona-192.png"],["apple-touch-icon","apple-touch-icon.png"]].forEach(function(x){
+    var l=document.createElement("link"); l.rel=x[0]; l.href=x[1]; document.head.appendChild(l);
+  });
+}
+</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Colloquio pregiudiziale – Tribunale Ecclesiastico Partenopeo</title>
@@ -1045,7 +1051,7 @@ function openSettings(primo){
 document.getElementById("bSet").addEventListener("click",e=>{ e.stopPropagation(); openSettings(false); });
 
 /* ================= VERSIONE WEB: funzionamento offline e installazione ================= */
-if("serviceWorker" in navigator && /^https?:$/.test(location.protocol) && document.querySelector('link[rel="manifest"]')){
+if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener("load",()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
 }
 

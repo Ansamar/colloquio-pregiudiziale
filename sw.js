@@ -1,7 +1,7 @@
 /* Funzionamento offline: conserva in cache i file dello strumento.
    Nessun dato delle pratiche passa da qui: restano nel browser del dispositivo.
    Ad ogni aggiornamento dello strumento, aumentare il numero di VERSIONE. */
-const VERSIONE = "colloquio-v1";
+const VERSIONE = "colloquio-v2";
 const FILE = ["./", "index.html", "manifest.webmanifest", "icona-192.png", "icona-512.png", "icona-maskable-512.png", "apple-touch-icon.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSIONE).then(c => c.addAll(FILE)).then(() => self.skipWaiting()));
